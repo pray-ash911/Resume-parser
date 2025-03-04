@@ -1,0 +1,6 @@
+{
+    "Software Engineer": ["python", "java", "javascript", "c++", "git", "docker"],
+    "Data Scientist": ["python", "machine learning", "data analysis", "pandas", "numpy"],
+    "Web Developer": ["javascript", "react", "html", "css", "node.js","django"],
+    "DevOps Engineer": ["aws", "docker", "kubernetes", "ci/cd", "linux"]
+}

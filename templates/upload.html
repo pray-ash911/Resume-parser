@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Your Resume | Resume Matcher</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            color: #343a40;
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        }
+        .header-section {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        .navbar {
+            border-radius: 8px;
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin-top: 20px;
+        }
+        .navbar a {
+            font-weight: 500;
+            color: #495057;
+            margin: 0 10px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .navbar a:hover {
+            color: #0d6efd;
+        }
+        .navbar a.active {
+            color: #0d6efd;
+            font-weight: 600;
+        }
+        .upload-container {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            padding: 40px;
+            transition: all 0.3s ease;
+        }
+        .upload-container:hover {
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+        .upload-icon {
+            font-size: 48px;
+            color: #0d6efd;
+            margin-bottom: 20px;
+        }
+        .custom-file-upload {
+            display: block;
+            border: 2px dashed #dee2e6;
+            border-radius: 8px;
+            padding: 30px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 20px;
+            background-color: #f8f9fa;
+        }
+        .custom-file-upload:hover {
+            border-color: #0d6efd;
+            background-color: #f1f8ff;
+        }
+        #file-name {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #495057;
+        }
+        .format-badge {
+            display: inline-block;
+            background-color: #e9ecef;
+            color: #495057;
+            padding: 5px 10px;
+            border-radius: 30px;
+            font-size: 14px;
+            margin: 5px;
+        }
+        .btn-upload {
+            background-color: #0d6efd;
+            border: none;
+            padding: 12px 30px;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        .btn-upload:hover {
+            background-color: #0b5ed7;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(13, 110, 253, 0.25);
+        }
+        footer {
+            margin-top: 50px;
+            padding: 20px 0;
+            color: #6c757d;
+            font-size: 14px;
+        }
+        .feature-card {
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #ffffff;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.04);
+            height: 100%;
+        }
+        .feature-icon {
+            font-size: 32px;
+            color: #0d6efd;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5 mb-5">
+        <div class="header-section">
+            <header class="text-center">
+                <h1 class="display-4 fw-bold">Resume Matcher</h1>
+                <p class="text-muted">Upload your resume and find your perfect job match</p>
+
+                <nav class="navbar">
+                    <div class="container d-flex justify-content-center">
+                        <a href="/" class="nav-link"><i class="fas fa-home me-1"></i> Home</a>
+                        <a href="/get-match-scores" class="nav-link active"><i class="fas fa-chart-bar me-1"></i> Match Scores</a>
+                        <a href="/about" class="nav-link"><i class="fas fa-info-circle me-1"></i> About Us</a>
+                        <a href="/contact" class="nav-link"><i class="fas fa-envelope me-1"></i> Contact</a>
+                    </div>
+                </nav>
+            </header>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="upload-container">
+                    <div class="text-center mb-4">
+                        <div class="upload-icon">
+                            <i class="fas fa-file-upload"></i>
+                        </div>
+                        <h2>Upload Your Resume</h2>
+                        <p class="text-muted mb-4">Our AI will analyze your resume and match you with suitable job opportunities</p>
+                    </div>
+
+                    <form action="/upload" method="post" enctype="multipart/form-data" id="upload-form">
+                        <label for="resume-upload" class="custom-file-upload">
+                            <i class="fas fa-cloud-upload-alt me-2"></i>
+                            <span>Drag and drop your file here or click to browse</span>
+                            <div id="file-name"></div>
+                            <input type="file" id="resume-upload" name="resume" required style="display: none;">
+                        </label>
+
+                        <div class="text-center mb-4">
+                            <p>Supported formats:</p>
+                            <span class="format-badge"><i class="far fa-file-pdf me-1"></i> PDF</span>
+                            <span class="format-badge"><i class="far fa-file-word me-1"></i> DOC</span>
+                            <span class="format-badge"><i class="far fa-file-word me-1"></i> DOCX</span>
+                            <span class="format-badge"><i class="far fa-file-alt me-1"></i> TXT</span>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-upload btn-primary btn-lg">
+                                <i class="fas fa-paper-plane me-2"></i> Upload and Analyze
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h4>AI-Powered Analysis</h4>
+                    <p>Our advanced AI technology analyzes your resume to identify key skills and experiences.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-percentage"></i>
+                    </div>
+                    <h4>Match Score</h4>
+                    <p>Get personalized job match scores based on your qualifications and experience.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h4>Secure Upload</h4>
+                    <p>Your resume is processed securely and your data remains private.</p>
+                </div>
+            </div>
+        </div>
+
+        <footer class="text-center">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Resume Matcher</h5>
+                    <p>Finding your perfect job match</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="/privacy">Privacy Policy</a></li>
+                        <li><a href="/terms">Terms of Service</a></li>
+                        <li><a href="/faq">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Connect With Us</h5>
+                    <div>
+                        <a href="#" class="me-2"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="me-2"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="me-2"><i class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-3">
+                <p>&copy; 2023 Resume Matcher. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Display file name when selected
+        document.getElementById('resume-upload').addEventListener('change', function() {
+            const fileName = this.files[0]?.name || '';
+            document.getElementById('file-name').textContent = fileName ? `Selected file: ${fileName}` : '';
+
+            // Change appearance when file is selected
+            const uploadLabel = document.querySelector('.custom-file-upload');
+            if (fileName) {
+                uploadLabel.style.borderColor = '#0d6efd';
+                uploadLabel.style.backgroundColor = '#f1f8ff';
+            } else {
+                uploadLabel.style.borderColor = '#dee2e6';
+                uploadLabel.style.backgroundColor = '#f8f9fa';
+            }
+        });
+
+        // Support drag and drop
+        const dropArea = document.querySelector('.custom-file-upload');
+        
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropArea.addEventListener(eventName, highlight, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, unhighlight, false);
+        });
+
+        function highlight() {
+            dropArea.style.borderColor = '#0d6efd';
+            dropArea.style.backgroundColor = '#f1f8ff';
+        }
+
+        function unhighlight() {
+            dropArea.style.borderColor = '#dee2e6';
+            dropArea.style.backgroundColor = '#f8f9fa';
+        }
+
+        dropArea.addEventListener('drop', handleDrop, false);
+
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            const fileInput = document.getElementById('resume-upload');
+            
+            fileInput.files = files;
+            
+            // Trigger change event
+            const event = new Event('change');
+            fileInput.dispatchEvent(event);
+        }
+    </script>
+</body>
+</html>

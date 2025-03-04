@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Parsing Results</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <header class="text-center mb-4">
+            <h1>Resume Parsing Results</h1>
+            <nav>
+                <a href="/" class="btn btn-link">Home</a>
+                <a href="/about" class="btn btn-link">About Us</a>
+                <a href="/contact" class="btn btn-link">Contact</a>
+                <li><a href="/get-match-scores">Match Scores</a></li>
+            </nav>
+        </header>
+        <div class="result bg-white p-4 rounded shadow">
+            <h2>Name: {{ name }}</h2>
+            <h3>Skills:</h3>
+            <ul class="list-group">
+                {% for skill in skills %}
+                    <li class="list-group-item">{{ skill }}</li>
+                {% endfor %}
+            </ul>
+            <h3>Score Report:</h3>
+            <p>{{ score_report }}</p>
+            <h3>Experience:</h3>
+            <ul class="list-group">
+                {% for exp in experience %}
+                    <li class="list-group-item">{{ exp }}</li>
+                {% endfor %}
+            </ul>
+            <h3>Education:</h3>
+            <ul class="list-group">
+                {% for edu in education %}
+                    <li class="list-group-item">{{ edu }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <footer class="text-center mt-4">
+            <p>&copy; 2023 Resume Parser. All rights reserved. | <a href="/privacy">Privacy Policy</a></p>
+        </footer>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

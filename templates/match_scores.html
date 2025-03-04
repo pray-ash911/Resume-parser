@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Match Scores</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f8f9fa;
+            color: #343a40;
+        }
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 24px;
+        }
+        .container {
+            padding: 20px;
+        }
+        .job-title {
+            font-weight: bold;
+            margin-top: 20px;
+            font-size: 20px;
+        }
+        .score {
+            margin-left: 20px;
+            font-size: 18px;
+        }
+        .matched-skills {
+            margin-left: 40px;
+            color: #555;
+            font-size: 16px;
+        }
+        .loader {
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid #007bff;
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite;
+            margin: 50px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <header>Match Scores</header>
+    <div class="container">
+        <div class="loader" id="loader"></div>
+        <div id="scores-container" style="display: none;">
+            <!-- Match scores will be populated here -->
+        </div>
+    </div>
+
+    <script>
+        // Simulating a delay to showcase the loader
+        setTimeout(() => {
+            const scores = JSON.parse('{{ matchScores | tojson }}');
+            const container = document.getElementById('scores-container');
+            const loader = document.getElementById('loader');
+
+            loader.style.display = 'none';
+            container.style.display = 'block';
+
+            for (const [jobTitle, { score, matched_skills }] of Object.entries(scores)) {
+                const jobDiv = document.createElement('div');
+                jobDiv.className = 'job-title';
+                jobDiv.innerText = jobTitle;
+
+                const scoreDiv = document.createElement('div');
+                scoreDiv.className = 'score';
+                scoreDiv.innerText = `Score: ${score}`;
+
+                const skillsDiv = document.createElement('div');
+                skillsDiv.className = 'matched-skills';
+                skillsDiv.innerText = `Matched Skills: ${matched_skills.length > 0 ? matched_skills.join(', ') : 'None'}`;
+
+                jobDiv.appendChild(scoreDiv);
+                jobDiv.appendChild(skillsDiv);
+                container.appendChild(jobDiv);
+            }
+        }, 2000); // Simulate a 2-second delay
+    </script>
+</body>
+</html>
